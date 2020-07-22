@@ -34,5 +34,32 @@ int main(void)
 	binary_tree_print(root);
 	binary_tree_levelorder(root, &print_num);
 	binary_tree_delete(root);
+
+	binary_tree_levelorder(NULL, &print_num);
+        binary_tree_levelorder(NULL, NULL);
+        root = binary_tree_node(NULL, 98);
+        binary_tree_print(root);
+        binary_tree_levelorder(root, NULL);
+        binary_tree_levelorder(root, &print_num);
+        root->left = binary_tree_node(root, 12);
+        root->left->left = binary_tree_node(root->left, 6);
+        root->left->left->left = binary_tree_node(root->left->left, 1000);
+        binary_tree_print(root);
+        binary_tree_levelorder(root, &print_num);
+
+        root->left->left->left->right = binary_tree_node(root->left->left->left, 1010);
+        binary_tree_print(root);
+        binary_tree_levelorder(root, &print_num);
+        binary_tree_delete(root);
+
+	root = binary_tree_node(NULL, 98);
+        root->left = binary_tree_node(root, 12);
+        root->right = binary_tree_node(root, 402);
+        root->right->right = binary_tree_node(root->right, 512);
+        root->right->right->right = binary_tree_node(root->right->right, 2046);
+        binary_tree_print(root);
+        binary_tree_levelorder(root, &print_num);
+        binary_tree_delete(root);
+
 	return (0);
 }
