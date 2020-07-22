@@ -30,6 +30,19 @@ typedef struct binary_tree_s bst_t;
 typedef struct binary_tree_s avl_t;
 typedef struct binary_tree_s heap_t;
 
+/**
+ * struct queue_s - singly linked queue.
+ *
+ * @node: binary_tree_t pointer to put on queue.
+ * @next: next node in queue
+ */
+
+typedef struct queue_s
+{
+	const binary_tree_t *node;
+	struct queue_s *next;
+} queue_t;
+
 /* Prototypes */
 void binary_tree_print(const binary_tree_t *);
 
@@ -57,5 +70,9 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 binary_tree_t *recursive_ancestor(const binary_tree_t *node,
 				  const binary_tree_t *first,
 				  const binary_tree_t *second);
+void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
+queue_t *push_to_q(queue_t **q_head, queue_t **q_tail,
+		   const binary_tree_t *node);
+queue_t *pop_the_q(queue_t **q_head, queue_t **q_tail);
 
 #endif /* end BINARY_TREES_*/
