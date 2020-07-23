@@ -13,6 +13,9 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	queue_t *q_head = NULL, *q_tail = NULL;
 	int is_complete = 1, last = 0;
 
+	if (tree == NULL)
+		return (0);
+
 	q_head = push_to_q(&q_head, &q_tail, tree);
 	while (q_head != NULL)
 	{
