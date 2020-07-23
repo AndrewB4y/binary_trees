@@ -74,5 +74,6 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 queue_t *push_to_q(queue_t **q_head, queue_t **q_tail,
 		   const binary_tree_t *node);
 queue_t *pop_the_q(queue_t **q_head, queue_t **q_tail);
+int binary_tree_is_complete(const binary_tree_t *tree);
 
 #endif /* end BINARY_TREES_*/
