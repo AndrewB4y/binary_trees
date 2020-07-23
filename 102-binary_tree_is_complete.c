@@ -10,45 +10,32 @@
 
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	queue_t *q_head = NULL, *q_tail = NULL, *q_check = NULL;
-	int is_com = 1, i = 0, levl = 0, max_nodes = 1;
-	int levl_full = 1, nodes_cnt = 1;
+	queue_t *q_head = NULL, *q_tail = NULL;
+	int is_complete = 1, last = 0;
 
-	if (tree == NULL)
-		return (0);
 	q_head = push_to_q(&q_head, &q_tail, tree);
-	while (q_head != NULL && is_com == 1)
+	while (q_head != NULL)
 	{
-		levl_full = (nodes_cnt == max_nodes) ? 1 : 0;
-		nodes_cnt = 0;
-		for (i = 1; i <= max_nodes && q_head != NULL; i++)
+		if (q_head->node == NULL)
 		{
-			if (q_head->node->left == NULL && q_head->node->right != NULL)
-			{
-				is_com = 0;
-				break;
-			}
-			q_check = q_tail;
-			q_tail = push_to_q(&q_head, &q_tail, q_head->node->left);
-			if (q_tail != q_check && (((nodes_cnt % 2) != 0) || levl_full ==  0))
-			{
-				is_com = 0;
-				break;
-			}
-			if (q_tail != q_check)
-				nodes_cnt += 1;
-			q_check = q_tail;
-			q_tail = push_to_q(&q_head, &q_tail, q_head->node->right);
-			if (q_tail != q_check)
-				nodes_cnt++;
-			q_head = pop_the_q(&q_head, &q_tail);
+			last = 1;
 		}
-		levl += 1;
-		max_nodes = 2 << (levl - 1);
+		else
+		{
+			if (last == 1)
+			{
+				is_complete = 0;
+				break;
+			}
+			q_tail = push_to_q(&q_head, &q_tail, q_head->node->left);
+			q_tail = push_to_q(&q_head, &q_tail, q_head->node->right);
+		}
+		q_head = pop_the_q(&q_head, &q_tail);
 	}
 	while (q_head != NULL)
 		pop_the_q(&q_head, &q_tail);
-	return (is_com);
+
+	return (is_complete);
 }
 
 /**
@@ -64,10 +51,6 @@ queue_t *push_to_q(queue_t **q_head, queue_t **q_tail,
 		   const binary_tree_t *node)
 {
 	queue_t *q_node = NULL;
-
-	/* If node sended is NULL, no new element is added to the queue */
-	if (node == NULL)
-		return (*q_tail);
 
 	q_node = malloc(sizeof(queue_t));
 	if (q_node == NULL)
