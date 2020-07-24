@@ -82,5 +82,6 @@ int is_less(const binary_tree_t *node, int r_val, int side);
 int is_greater(const binary_tree_t *node, int r_val, int side);
 bst_t *bst_insert(bst_t **tree, int value);
 bst_t *array_to_bst(int *array, size_t size);
+bst_t *bst_search(const bst_t *tree, int value);
 
 #endif /* end BINARY_TREES_*/
