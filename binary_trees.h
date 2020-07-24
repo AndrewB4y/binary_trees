@@ -80,5 +80,6 @@ binary_tree_t *binary_tree_rotate_right(binary_tree_t *tree);
 int binary_tree_is_bst(const binary_tree_t *tree);
 int is_less(const binary_tree_t *node, int r_val, int side);
 int is_greater(const binary_tree_t *node, int r_val, int side);
+bst_t *bst_insert(bst_t **tree, int value);
 
 #endif /* end BINARY_TREES_*/
